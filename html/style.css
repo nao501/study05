@@ -1,0 +1,47 @@
+#form5{
+    position:relative; 
+    margin-bottom:20px;	
+    }
+    #sbox5{	
+    outline:0;	
+    height:50px;
+    padding:0 10px; 
+    position:absolute; 
+    left:0;
+    top:0; 
+    max-width:270px;
+    border-radius:2px;
+    background:#eee;
+    }
+    #sbtn5{
+    width:70px;
+    height:50px;
+    position:absolute; 
+    left:280px; 
+    top:0;
+    border-radius:2px;
+    background:#7fbfff;
+    color:#fff;
+    font-weight:bold;
+    font-size:16px;
+    border:none;
+    }
+    #sbtn5:hover{
+    background:#eee;
+    color:#7fbfff;
+    }
+textarea{
+  width: 100%; /* 幅 */
+  height: 100px;/*高さ*/
+  margin: 1em 0; /* 周囲の余白 */
+  padding: 0.5em; /* 枠線内の余白 */
+  font-size: 1em; /* フォントサイズ */
+  border: solid 2px #1e4ec7; /* 枠線のスタイル */
+  border-radius: 4px; /* 角丸に */
+  
+
+}
+textarea:focus {
+    border-color: #357fcf;
+    outline: 0;
+  }

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>検索</title>
+        <link rel="stylesheet" href="./style.css"> 
+    </head>
+    
+    <body>
+        <h2>eelテスト</h2>
+        <div class="">
+            商品コード<input id="item_codes" name="Item_code" type="text" placeholder="商品コード"></input><br/>
+            個数<input id="order_counts" name="Order_count" type="text" required="個数入力してください" spellchech = "true"placeholder="検索" ></input>
+            <button id ="item_buy">購入</button>
+            <button id ="finish">会計</button><br/>
+        </div>
+        <div>
+            <textarea id ="result" class="log-view-area"></textarea>
+        </div>
+
+        <script type="text/javascript" src="./eel.js"></script>
+        <script>
+            item_buy.addEventListener('click', () => {
+                txt1 = Item_code.value;
+                if(txt1 == "") {alert("商品コードを記入してください");
+                return false;
+                }
+                txt2 = Order_count.value;
+                if(txt2 == "") {alert("個数を記入してください");
+                return false;
+                }           
+                else{eel.main(item_codes.value,order_counts.value))
+                }     
+            })
+            finish.addEventListener('click', () => {
+                item_codes.value = '000'
+                item_counts.value = ''
+                eel.main(item_codes.value,item_counts.value))
+
+
+            eel.expose(view_log_js)
+            function view_log_js(text){
+                result.value += text +"\n"
+            }
+        </script> 
+    </body>
+</html>
