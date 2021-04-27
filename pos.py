@@ -46,7 +46,7 @@ class Order:
                     eel.view_log_js(f"商品コード{item.item_code}:{item.item_name}￥{item.price}円/{order_count}個")
                     buy_item =f"{item.item_name} ￥{item.price}円 /{order_count}個\n"
                     self.add_buy_order(buy_item)
-                    order_price = int(item.price)*order_count
+                    order_price = int(item.price)*int(order_count)
                     self.total_price = order_price +self.total_price
             else:
                 pass
@@ -113,15 +113,14 @@ def main(item_codes,order_counts):
     # オーダー登録
     order=Order(item_master,order_count,buy_item,total_price)
 
-
-    if item_codes == "000":
-        order.search_master(total_price)
-        customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
-        order.amount_calculation(customer_money,total_price)
-        order.receipt(total_price,customer_money)
-
-    else:
-        order.add_item_order(item_codes,order_counts)
+    while True:
+        if item_codes == "000":
+            #customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
+            order.amount_calculation(customer_money,total_price)
+            order.receipt(total_price,customer_money)
+        else:
+            order.add_item_order(item_codes,order_counts)
+            order.search_master(total_price)
 
     # マスター検索      
     
