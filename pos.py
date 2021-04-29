@@ -83,7 +83,7 @@ class Order:
 
 
 ### メイン処理
-def main(item_codes,order_counts):
+def main(item_code,item_count):
     
     # マスタ登録
     item_master=[]
@@ -114,12 +114,12 @@ def main(item_codes,order_counts):
     order=Order(item_master,order_count,buy_item,total_price)
 
     while True:
-        if item_codes == "000":
+        if item_code == "000":
             #customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
             order.amount_calculation(customer_money,total_price)
             order.receipt(total_price,customer_money)
         else:
-            order.add_item_order(item_codes,order_counts)
+            order.add_item_order(item_code,item_count)
             order.search_master(total_price)
 
     # マスター検索      

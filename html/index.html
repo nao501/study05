@@ -7,7 +7,7 @@
     <body>
         <h2>eelテスト</h2>
         <div class="">
-            商品コード<input id="item_codes" name="Item_codes" type="text" placeholder="商品コード"></input><br/>
+            商品コード<input id="order_codes" name="Item_codes" type="text" placeholder="商品コード"></input><br/>
             個数<input id="order_counts" name="Order_counts" type="text" required="個数入力してください" spellchech = "true"placeholder="検索" ></input>
             <button id ="item_buy">購入</button><br/>
         </div>
@@ -17,7 +17,7 @@
         <script type="text/javascript" src="./eel.js"></script>
         <script>
             item_buy.addEventListener('click', () => {
-                txt1 = item_codes.value;
+                txt1 = order_codes.value;
                 if(txt1 == "") {alert("商品コードを記入してください");
                 return false;
                 }
