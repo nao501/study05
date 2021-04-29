@@ -83,12 +83,12 @@ class Order:
 
 
 ### メイン処理
-def main(item_code,item_count):
+def main(item_code,item_count,item_money):
     
     # マスタ登録
     item_master=[]
     order_count=[]
-    customer_money=0
+    customer_money= item_money
     total_price=0
     #商品マスター.csvからデータを読み込み
     with open("商品マスター.csv",'r') as f:
@@ -116,11 +116,12 @@ def main(item_code,item_count):
     while True:
         if item_code == "000":
             #customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
-            order.amount_calculation(customer_money,total_price)
-            order.receipt(total_price,customer_money)
+            break
         else:
             order.add_item_order(item_code,item_count)
-            order.search_master(total_price)
-
+            
+    order.search_master(total_price)
+    order.amount_calculation(customer_money,total_price)
+    order.receipt(total_price,customer_money)
     # マスター検索      
     

@@ -20,11 +20,12 @@ class Order:
 
       
 @ eel.expose
-def main(order_codes,order_counts):
+def main(order_codes,order_counts,item_money):
     order=Order(order_codes,order_counts)
     order.add_item_order(order_codes,order_counts)
     
     for item_code,item_count in zip(order.item_order_list, order.order_count_list): 
-        pos.main(item_code,item_count)
+        pos.main(item_code,item_count,item_money)
+        
 
 desktop.start(app_name,end_point,size)
