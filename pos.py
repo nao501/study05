@@ -1,6 +1,5 @@
 import pandas as pd
 import datetime
-import desktop
 import csv
 import eel
 
@@ -52,43 +51,25 @@ class Order:
                 pass
         print(f"\n合計金額は{self.total_price}円")
         eel.view_log_js(f"\n合計金額は{self.total_price}円")
-         
-    def amount_calculation(self,customer_money,total_price):
-        return_money = customer_money-self.total_price    
-        if return_money <0:
-           error_money =total_price-customer_money
-           print(f"{error_money}円不足しています\n")
-           eel.view_log_js(f"{error_money}円不足しています\n")
-        elif return_money == 0:
-           print("ちょうど頂きます\n")
-           eel.view_log_js("ちょうど頂きます\n")
-        else:
-           print(f"{return_money}円お返しです。\n")
-           eel.view_log_js(f"{return_money}円お返しです。\n")
     
-    def receipt(self,total_price,customer_money):
+    def receipt(self,item_money):
         dt_now = datetime.datetime.now()
-        return_money = customer_money-total_price
+        return_money = item_money-self.total_price
         res1=''.join(''.join(map(str,x))for x in self.buy_item_list)
-        res2 = f"{dt_now}\n{res1}\n合計金額{self.total_price}円\nお預かり{customer_money}円\nおつり{return_money}円 "
+        res2 = f"{dt_now}\n{res1}\n合計金額{self.total_price}円\nお預かり{item_money}円\nおつり{return_money}円 "
 
         with open("レシート.txt",mode='w') as f:
             f.write(res2)
         print(res2)
         eel.view_log_js(res2)
-
-  
-
-
-
+         
 
 ### メイン処理
-def main(item_code,item_count,item_money):
+def main(item_code,item_count):
     
     # マスタ登録
     item_master=[]
     order_count=[]
-    customer_money= item_money
     total_price=0
     #商品マスター.csvからデータを読み込み
     with open("商品マスター.csv",'r') as f:
@@ -97,17 +78,17 @@ def main(item_code,item_count,item_money):
         access_log = [row for row in reader]
    
     item_code_list = []
-    tem_name_list = []
+    item_name_list = []
     price_list = []
     buy_item=[]
 
     for row in access_log:
         item_code_list.append(row[0])
-        tem_name_list.append(row[1])
+        item_name_list.append(row[1])
         price_list.append(row[2])
     
     #各リストをItem()に入れていく
-    for item_code, item_name, price in zip(item_code_list,tem_name_list,price_list):
+    for item_code, item_name, price in zip(item_code_list,item_name_list,price_list):
         item_master.append(Item(item_code, item_name, price))
     
     # オーダー登録
@@ -121,7 +102,6 @@ def main(item_code,item_count,item_money):
             order.add_item_order(item_code,item_count)
             
     order.search_master(total_price)
-    order.amount_calculation(customer_money,total_price)
-    order.receipt(total_price,customer_money)
+  
     # マスター検索      
     
