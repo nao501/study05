@@ -17,7 +17,7 @@ class Item:
 
 ### オーダークラス
 class Order:
-    def __init__(self,item_master,order_count,buy_item,total_price):
+    def __init__(self,item_master,order_count,total_price):
         self.item_order_list=[]
 
         self.order_count = order_count
@@ -80,7 +80,7 @@ def main(item_code,item_count):
     item_code_list = []
     item_name_list = []
     price_list = []
-    buy_item=[]
+    
 
     for row in access_log:
         item_code_list.append(row[0])
@@ -92,7 +92,7 @@ def main(item_code,item_count):
         item_master.append(Item(item_code, item_name, price))
     
     # オーダー登録
-    order=Order(item_master,order_count,buy_item,total_price)
+    order=Order(item_master,order_count,total_price)
 
     while True:
         if item_code == "000":
