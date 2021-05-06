@@ -47,6 +47,8 @@ class Order:
                     self.add_buy_order(buy_item)
                     order_price = int(item.price)*int(order_count)
                     self.total_price = order_price +self.total_price
+                    #self.item_order_list.pop()
+                    #self.order_count_list.pop()
             else:
                 pass
         print(f"\n合計金額は{self.total_price}円")
@@ -54,7 +56,7 @@ class Order:
     
     def receipt(self,item_money):
         dt_now = datetime.datetime.now()
-        return_money = item_money-self.total_price
+        return_money = int(item_money)-self.total_price
         res1=''.join(''.join(map(str,x))for x in self.buy_item_list)
         res2 = f"{dt_now}\n{res1}\n合計金額{self.total_price}円\nお預かり{item_money}円\nおつり{return_money}円 "
 
@@ -63,16 +65,19 @@ class Order:
         print(res2)
         eel.view_log_js(res2)
          
+    def clear_list(self):
+        self.item_order_list.clear()
+        self.order_count_list.clear()
 
 ### メイン処理
-def main(item_code,item_count):
+def main():
     
     # マスタ登録
     item_master=[]
     order_count=[]
     total_price=0
     #商品マスター.csvからデータを読み込み
-    with open("商品マスター.csv",'r') as f:
+    with open("商品マスター.csv",'r',encoding="utf-8_sig") as f:
         header =next(csv.reader(f))
         reader = csv.reader(f)
         access_log = [row for row in reader]
@@ -93,15 +98,33 @@ def main(item_code,item_count):
     
     # オーダー登録
     order=Order(item_master,order_count,total_price)
-
-    while True:
-        if item_code == "000":
-            #customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
-            break
-        else:
-            order.add_item_order(item_code,item_count)
+    return order
+    # while True:
+    #     if item_code == "000":
+    #         #customer_money =eel.view_log_js(int(input("支払い金額を入力してください：")))
+    #         break
+    #     else:
+    #         order.add_item_order(item_code,item_count)
+    #         break
             
-    order.search_master(total_price)
+    # order.search_master(total_price)
   
     # マスター検索      
+
+def items_append (items_code,items_name,items_price):
+    PASS=r"商品マスター.csv"
+    with open(PASS) as f:
+         Item_name = f.readlines()
+         Item_deta =[ deta.strip() for deta in Item_name ]
+         for  deta in Item_name:
+             print(deta.strip())   
+
+    list_append =f'{items_code},{items_name},{items_price}'
+    Item_deta.append(list_append)
+    
+    PASS=r'商品マスター.csv'
+    with open(PASS,mode='w') as f:
+        f.writelines("\n".join(Item_deta))
+    
+    
     

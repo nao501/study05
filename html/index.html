@@ -6,13 +6,23 @@
     
     <body>
         <h2>eelテスト</h2>
-        <div class="">
+        <div class="Order">
             商品コード<input id="order_codes" name="Item_codes" type="text" placeholder="商品コード"></input><br/>
             個数<input id="order_counts" name="Order_counts" type="text" required="個数入力してください" spellchech = "true"placeholder="検索" ></input>
             <button id ="item_buy">購入</button><br/>
+            金額<input id="item_money" name="Item_money" type="text" placeholder="金額"></input>
+            <button id ="finish">会計</button><br/>
         </div>
         <div>
             <textarea id ="result" class="log-view-area"></textarea>
+        </div>
+        <div class="Item">
+            追加商品コード<input id="items_code" name="Item_codes" type="text" placeholder="商品コード"></input><br/>
+            追加商品名<input id="items_name" name="Item_codes" type="text" placeholder="商品名"></input><br/>
+            追加商品値段<input id="items_price" name="Item_codes" type="text" placeholder="値段"></input><br/>
+            <button id ="item_append">追加</button><br/>
+        <div>
+            <textarea id ="item_append_result" class="log-view-area2"></textarea>
         </div>
         <script type="text/javascript" src="./eel.js"></script>
         <script>
@@ -35,12 +45,7 @@
                 result.value += text +"\n"
             }
         </script> 
-        <div class="">
-            金額<input id="item_money" name="Item_money" type="text" placeholder="金額"></input>
-            <button id ="finish">会計</button><br/>
-        </div>
         <div>
-            <textarea id ="money_result" class="log-view-area2"></textarea>
             <script>
             finish.addEventListener('click', () => {
                 txt1 = item_money.value;
@@ -56,6 +61,30 @@
                 result.value += text +"\n"
             }
         </script>
+        <script>
+            item_append.addEventListener('click', () => {
+                txt1 = items_code.value;
+                if(txt1 == "") {alert("商品コードを記入してください");
+                return false;
+                }
+                txt2 = items_name.value;
+                if(txt2 == "") {alert("商品名を記入してください");
+                return false;
+                }    
+                txt3 = items_price.value;
+                if(txt2 == "") {alert("値段を記入してください");
+                return false;
+                }              
+                else {
+                    eel.items_append (items_code.value,items_name.value,items_price.value)
+                }     
+            })
+
+            eel.expose(view_log_js2)
+            function view_log_js(text){
+                result.value += text +"\n"
+            }
+        </script> 
         </div>
     </body>
 </html>
